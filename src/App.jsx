@@ -7,7 +7,7 @@ import store from './store';
 import Wrapper from './components/Wrapper';
 import Overview from './components/Overview';
 import AddPractice from './components/AddPractice';
-
+import Practice from './components/Practice';
 
 export default function App() {
   return (
@@ -17,6 +17,7 @@ export default function App() {
           <Switch>
             <Route component={Overview} path="/" exact />
             <Route component={AddPractice} path="/addpractice" />
+            <Route component={Practice} path="/practice/:date" />
           </Switch>
         </BrowserRouter>
       </Wrapper>

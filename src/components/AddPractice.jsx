@@ -23,7 +23,7 @@ export default connect(
   null,
   dispatch => ({
     submit() {
-      dispatch(addPractice('123'));
+      dispatch(addPractice());
     },
   }),
 )(AddPractice);

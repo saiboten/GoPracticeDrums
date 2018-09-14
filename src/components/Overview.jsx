@@ -1,10 +1,16 @@
 import React from 'react';
-import { arrayOf } from 'prop-types';
+import { compose } from 'redux';
+import { firebaseConnect } from 'react-redux-firebase';
+import { arrayOf, Any } from 'prop-types';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
+import Moment from 'react-moment';
 
 function Overview({ practices }) {
-  const list = practices.map(el => (<li key={el}>{el}</li>));
+  const list = practices.map(el => (
+    <li key={el.date}>
+      <Link to={`/practice/${el.date}`}><Moment fromNowDuring={172800000} format="DD.MM.YYYY">{el.date}</Moment></Link>
+    </li>));
 
   return (
     <div>
@@ -16,7 +22,14 @@ function Overview({ practices }) {
 }
 
 Overview.propTypes = {
-  practices: arrayOf(String).isRequired,
+  practices: arrayOf(Any).isRequired,
 };
 
-export default connect(({ practice: { practices } }) => ({ practices }), null)(Overview);
+export default compose(
+  firebaseConnect([
+    'practices', // { path: '/todos' } // object notation
+  ]),
+  connect(
+    state => ({ practices: state.firebase.data.practices ? Object.values(state.firebase.data.practices) : [] }),
+  ),
+)(Overview);

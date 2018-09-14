@@ -1,7 +1,7 @@
 import { applyMiddleware, compose, createStore } from 'redux';
 import { reactReduxFirebase, getFirebase } from 'react-redux-firebase';
 import createSagaMiddleware from 'redux-saga';
-import firebase from 'firebase/app';
+import firebase from 'firebase';
 import rootReducer from './reducers';
 import rootSagas from './sagas';
 

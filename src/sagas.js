@@ -1,26 +1,20 @@
-import { delay } from 'redux-saga';
-import { put, all } from 'redux-saga/effects';
+import { put, takeEvery, all } from 'redux-saga/effects';
 
-// function* helloSaga(getFire) {
-//   try {
-//     yield getFire().push('/some/path', { nice: 'work!' });
-//   } catch (err) {
-//     console.log('Error in saga!:', err);
-//   }
-// }
-
-function* incrementAsync() {
-  yield delay(15000);
-  yield put({ type: 'INCREMENT' });
+function* addPractice(getFirebase) {
+  try {
+    yield getFirebase().push('/practices', { date: Date.now() });
+    yield put({ type: 'PRACTICE_ADDED' });
+  } catch (err) {
+    console.log('Error in saga!:', err);
+  }
 }
 
-// function* watchIncrementAsync() {
-//   yield takeEvery('INCREMENT_ASYNC', incrementAsync);
-// }
+function* watchAddPractice(something) {
+  yield takeEvery('ADD_PRACTICE', addPractice, something);
+}
 
-export default function* rootSaga() {
+export default function* rootSaga(getfb) {
   yield all([
-    incrementAsync(),
-    // watchIncrementAsync(),
+    watchAddPractice(getfb),
   ]);
 }
