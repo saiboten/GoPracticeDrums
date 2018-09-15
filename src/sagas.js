@@ -1,19 +1,40 @@
 import { put, takeEvery, all } from 'redux-saga/effects';
 
-function* addPractice(getFirebase) {
+function* addPractice(getFirebase, { date }) {
   try {
-    const now = Date.now();
-    yield getFirebase().set(`/practices/${now}`, { setupComplete: false, created: now });
+    yield getFirebase().set(`/practices/${date}`, { setupComplete: false, created: date });
     yield put({ type: 'PRACTICE_ADDED' });
   } catch (err) {
     console.log('Error in saga!:', err);
   }
 }
 
+function addLaps(count = 1, length = 60) {
+  const lap = {
+    description: '',
+    pass: false,
+    length,
+  };
+
+  const laps = [];
+  for (let i = 0; i < count; i++) {
+    laps.push(lap);
+  }
+
+  return laps;
+}
+
 function* setupTiredAsF(getFirebase, { date }) {
   try {
-    yield getFirebase().set(`/practices/${date}`, {
-      created: parseInt(date, 10), setupComplete: true, bpm: 120, header: 'Tired as f', description: '',
+    yield getFirebase().update(`/practices/${date}`, {
+      type: 'tiredasf',
+      setupComplete: true,
+      header: 'Tired as f',
+      description: '',
+      pass: false,
+      bpm: -1,
+      roundOne: addLaps(4),
+      roundTwo: addLaps(4),
     });
   } catch (err) {
     console.log('Error in saga!:', err);
@@ -22,8 +43,14 @@ function* setupTiredAsF(getFirebase, { date }) {
 
 function* setPieceOfCake(getFirebase, { date }) {
   try {
-    yield getFirebase().set(`/practices/${date}`, {
-      created: parseInt(date, 10), setupComplete: true, header: 'Piece of cake', bpm: 90, description: '',
+    yield getFirebase().update(`/practices/${date}`, {
+      type: 'pieceofcake',
+      setupComplete: true,
+      header: 'Piece of cake',
+      bpm: -1,
+      description: '',
+      roundOne: addLaps(2, 900),
+      roundTwo: addLaps(3, 600),
     });
   } catch (err) {
     console.log('Error in saga!:', err);

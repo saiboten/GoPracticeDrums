@@ -15,6 +15,6 @@ export default function FullMenu() {
   return (
     <Menu>
       <MenuItem><Link to="/">Oversikt</Link></MenuItem>
-      <MenuItem><Link to="/addpractice">Legg til øvelse</Link></MenuItem>
+      <MenuItem><Link to="/addpractice">Legg til øving</Link></MenuItem>
     </Menu>);
 }

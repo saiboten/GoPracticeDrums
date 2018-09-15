@@ -1,16 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import TiredAsF from './TiredAsF';
+import PieceOfCake from './PieceOfCake';
 
-export default function ViewPractice({ practice: { bpm, description, header } }) {
-  return (
-    <div>
-      <h1>{header}</h1>
-      <p>
-BPM:
-        {bpm}
-      </p>
-      <p>{description}</p>
-    </div>);
+export default function ViewPractice(props) {
+  const { practice: { type } } = props;
+  switch (type) {
+    case 'tiredasf': return (<TiredAsF {...props} />);
+    case 'pieceofcake': return (<PieceOfCake {...props} />);
+    default: return (<div>Hei</div>);
+  }
 }
 
 ViewPractice.propTypes = {

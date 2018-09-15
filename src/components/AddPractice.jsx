@@ -21,16 +21,17 @@ class AddPractice extends Component {
 
   handleChangedDate(momentDate) {
     this.setState({
-      selectedDate: momentDate.unix(),
+      selectedDate: momentDate.valueOf(),
     });
   }
 
   complete() {
     const { submit } = this.props;
+    const { selectedDate } = this.state;
     this.setState({
       complete: true,
     });
-    submit();
+    submit(selectedDate);
   }
 
   render() {
@@ -42,7 +43,6 @@ class AddPractice extends Component {
 
     return (
       <div>
-        <p>{selectedDate}</p>
         <Calendar onChange={this.handleChangedDate} />
         {selectedDate && <button type="button" onClick={this.complete}>Legg til dag</button>}
       </div>
@@ -59,8 +59,8 @@ AddPractice.propTypes = {
 export default connect(
   null,
   dispatch => ({
-    submit() {
-      dispatch(addPractice());
+    submit(date) {
+      dispatch(addPractice(date));
     },
   }),
 )(AddPractice);
