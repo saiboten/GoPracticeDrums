@@ -6,28 +6,28 @@ import { connect } from 'react-redux';
 import SetupPractice from './SetupPractice';
 import ViewPractice from './ViewPractice';
 
-function Practice({ practices }) {
-  if (!isLoaded(practices)) {
+function Practice({ practice, ...rest }) {
+  if (!isLoaded(practice)) {
     return (<div>Loading</div>);
   }
-  return (<div>{practices.setupComplete ? <ViewPractice /> : <SetupPractice />}</div>);
+  return (<div>{practice.setupComplete ? <ViewPractice practice={practice} /> : <SetupPractice {...rest} />}</div>);
 }
 
 Practice.propTypes = {
-  practices: any,
+  practice: any,
 };
 
 Practice.defaultProps = {
-  practices: undefined,
+  practice: undefined,
 };
 
 export default compose(
-  firebaseConnect(({ match: { params: { date } } }) => [
-    `practices/${date}`, // { path: '/todos' } // object notation
+  firebaseConnect(({ match: { params: { created } } }) => [
+    `practices/${created}`, // { path: '/todos' } // object notation
   ]),
   connect(
     (state, ownProps) => ({
-      practices: state.firebase.data.practices && state.firebase.data.practices[ownProps.match.params.date],
+      practice: state.firebase.data.practices && state.firebase.data.practices[ownProps.match.params.created],
     }),
   ),
 )(Practice);

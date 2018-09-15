@@ -3,7 +3,12 @@ export const addPractice = date => ({
   date,
 });
 
-export const addPractice2 = info => ({
-  type: 'SET_VISIBILITY_FILTER',
-  info,
+export const setupPieceOfCake = date => ({
+  type: 'SETUP_PIECE_OF_CAKE',
+  date,
+});
+
+export const setupTiredAsF = date => ({
+  type: 'SETUP_TIRED_AS_F',
+  date,
 });

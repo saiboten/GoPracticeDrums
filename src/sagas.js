@@ -10,12 +10,34 @@ function* addPractice(getFirebase) {
   }
 }
 
-function* watchAddPractice(something) {
-  yield takeEvery('ADD_PRACTICE', addPractice, something);
+function* setupTiredAsF(getFirebase, { date }) {
+  try {
+    yield getFirebase().set(`/practices/${date}`, {
+      created: parseInt(date, 10), setupComplete: true, bpm: 120, header: 'Tired as f', description: '',
+    });
+  } catch (err) {
+    console.log('Error in saga!:', err);
+  }
 }
 
-export default function* rootSaga(getfb) {
+function* setPieceOfCake(getFirebase, { date }) {
+  try {
+    yield getFirebase().set(`/practices/${date}`, {
+      created: parseInt(date, 10), setupComplete: true, header: 'Piece of cake', bpm: 90, description: '',
+    });
+  } catch (err) {
+    console.log('Error in saga!:', err);
+  }
+}
+
+function* watchAddPractice(getFirebase) {
+  yield takeEvery('ADD_PRACTICE', addPractice, getFirebase);
+  yield takeEvery('SETUP_TIRED_AS_F', setupTiredAsF, getFirebase);
+  yield takeEvery('SETUP_PIECE_OF_CAKE', setPieceOfCake, getFirebase);
+}
+
+export default function* rootSaga(getFirebase) {
   yield all([
-    watchAddPractice(getfb),
+    watchAddPractice(getFirebase),
   ]);
 }

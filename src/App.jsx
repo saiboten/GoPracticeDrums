@@ -20,7 +20,7 @@ export default function App() {
             <Switch>
               <Route component={Overview} path="/" exact />
               <Route component={AddPractice} path="/addpractice" />
-              <Route component={Practice} path="/practice/:date" />
+              <Route component={Practice} path="/practice/:created" />
             </Switch>
           </React.Fragment>
         </BrowserRouter>
