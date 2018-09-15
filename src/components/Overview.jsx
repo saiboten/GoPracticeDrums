@@ -9,12 +9,11 @@ import Moment from 'react-moment';
 function Overview({ practices }) {
   const list = practices.map(el => (
     <li key={el.date}>
-      <Link to={`/practice/${el.date}`}><Moment fromNowDuring={172800000} format="DD.MM.YYYY">{el.date}</Moment></Link>
+      <Link to={`/practice/${el.created}`}><Moment fromNowDuring={172800000} format="DD.MM.YYYY">{el.created}</Moment></Link>
     </li>));
 
   return (
     <div>
-      <Link to="/addpractice">Legg til øving</Link>
       <ul>
         {list}
       </ul>
