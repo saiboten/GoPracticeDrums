@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { func } from 'prop-types';
 import { Redirect } from 'react-router-dom';
-import { Button } from '@smooth-ui/core-em';
+import { Button, Typography } from '@smooth-ui/core-em';
 
 import Calendar from 'rc-calendar';
 import 'rc-calendar/assets/index.css';
@@ -45,7 +45,9 @@ class AddPractice extends Component {
 
     return (
       <Wrapper>
+        <Typography variant="h1">Legg til øving</Typography>
         <Calendar onChange={this.handleChangedDate} />
+        <br />
         {selectedDate && <Button onClick={this.complete}>Legg til dag</Button>}
       </Wrapper>
     );

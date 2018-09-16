@@ -12,7 +12,7 @@ function Practice({ practice, ...rest }) {
   if (!isLoaded(practice)) {
     return (<div>Loading</div>);
   }
-  return (<Wrapper>{practice.setupComplete ? <ViewPractice practice={practice} /> : <SetupPractice {...rest} />}</Wrapper>);
+  return (<Wrapper>{practice.setupComplete ? <ViewPractice practice={practice} {...rest} /> : <SetupPractice {...rest} />}</Wrapper>);
 }
 
 Practice.propTypes = {

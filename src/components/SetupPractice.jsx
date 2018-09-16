@@ -1,15 +1,24 @@
 import React from 'react';
 import { func } from 'prop-types';
 import { connect } from 'react-redux';
-import { Button } from '@smooth-ui/core-em';
+import { Button, Typography } from '@smooth-ui/core-em';
+import styled from 'react-emotion';
 import { setupPieceOfCake, setupTiredAsF } from '../actions';
+
+const StyledButtonWrapper = styled('div')`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+`;
 
 function SetupPractice({ pieceOfCake, tiredAsF }) {
   return (
     <div>
-      <h1>Du har ikke satt opp øvelse for dagen enda</h1>
-      <Button onClick={pieceOfCake}>"Piece of Cake" - Doble basstrommer</Button>
-      <Button onClick={tiredAsF}>"Tired as f" - Doble basstrommer</Button>
+      <Typography variant="h1">Velg øvelse</Typography>
+      <StyledButtonWrapper>
+        <Button onClick={pieceOfCake}>"Piece of Cake" - Doble basstrommer</Button>
+        <Button mt={10} onClick={tiredAsF}>"Tired as f" - Doble basstrommer</Button>
+      </StyledButtonWrapper>
     </div>);
 }
 

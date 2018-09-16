@@ -32,7 +32,6 @@ function* setupTiredAsF(getFirebase, { date }) {
       header: 'Tired as f',
       description: '',
       pass: false,
-      bpm: -1,
       roundOne: addLaps(4),
       roundTwo: addLaps(4),
     });
@@ -47,10 +46,19 @@ function* setPieceOfCake(getFirebase, { date }) {
       type: 'pieceofcake',
       setupComplete: true,
       header: 'Piece of cake',
-      bpm: -1,
       description: '',
       roundOne: addLaps(2, 900),
       roundTwo: addLaps(3, 600),
+    });
+  } catch (err) {
+    console.log('Error in saga!:', err);
+  }
+}
+
+function* updatePieceOfCake(getFirebase, { date, newValues }) {
+  try {
+    yield getFirebase().update(`/practices/${date}`, {
+      ...newValues,
     });
   } catch (err) {
     console.log('Error in saga!:', err);
@@ -61,6 +69,7 @@ function* watchAddPractice(getFirebase) {
   yield takeEvery('ADD_PRACTICE', addPractice, getFirebase);
   yield takeEvery('SETUP_TIRED_AS_F', setupTiredAsF, getFirebase);
   yield takeEvery('SETUP_PIECE_OF_CAKE', setPieceOfCake, getFirebase);
+  yield takeEvery('PIECE_OF_CAKE_UPDATE', updatePieceOfCake, getFirebase);
 }
 
 export default function* rootSaga(getFirebase) {

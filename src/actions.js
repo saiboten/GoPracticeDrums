@@ -12,3 +12,9 @@ export const setupTiredAsF = date => ({
   type: 'SETUP_TIRED_AS_F',
   date,
 });
+
+export const pieceOfCakeUpdate = (date, newValues) => ({
+  type: 'PIECE_OF_CAKE_UPDATE',
+  date,
+  newValues,
+});
