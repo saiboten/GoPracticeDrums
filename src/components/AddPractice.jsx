@@ -7,6 +7,7 @@ import { Button } from '@smooth-ui/core-em';
 import Calendar from 'rc-calendar';
 import 'rc-calendar/assets/index.css';
 
+import Wrapper from './Wrapper';
 import { addPractice } from '../actions';
 
 class AddPractice extends Component {
@@ -43,10 +44,10 @@ class AddPractice extends Component {
     }
 
     return (
-      <div>
+      <Wrapper>
         <Calendar onChange={this.handleChangedDate} />
         {selectedDate && <Button onClick={this.complete}>Legg til dag</Button>}
-      </div>
+      </Wrapper>
     );
   }
 }

@@ -6,11 +6,13 @@ import { connect } from 'react-redux';
 import SetupPractice from './SetupPractice';
 import ViewPractice from './ViewPractice';
 
+import Wrapper from './Wrapper';
+
 function Practice({ practice, ...rest }) {
   if (!isLoaded(practice)) {
     return (<div>Loading</div>);
   }
-  return (<div>{practice.setupComplete ? <ViewPractice practice={practice} /> : <SetupPractice {...rest} />}</div>);
+  return (<Wrapper>{practice.setupComplete ? <ViewPractice practice={practice} /> : <SetupPractice {...rest} />}</Wrapper>);
 }
 
 Practice.propTypes = {

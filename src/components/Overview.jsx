@@ -7,6 +7,8 @@ import { connect } from 'react-redux';
 import Moment from 'react-moment';
 import styled from 'react-emotion';
 
+import Wrapper from './Wrapper';
+
 const StyleLink = styled(Link)`
   text-decoration: none;
 
@@ -22,21 +24,18 @@ function Overview({ practices }) {
   const list = practices.map(el => (
     <li key={el.created}>
       <StyleLink to={`/practice/${el.created}`}>
-        {el.setupComplete && `${el.header}`}
-        {' '}
--
-        {' '}
+        {el.setupComplete && `${el.header} -`}
         <Moment fromNowDuring={172800000} format="DD.MM.YYYY">{el.created}</Moment>
       </StyleLink>
     </li>));
 
   return (
-    <div>
+    <Wrapper>
       <h1>Oversikt over alle øvinger</h1>
       <ul>
         {list}
       </ul>
-    </div>);
+    </Wrapper>);
 }
 
 Overview.propTypes = {

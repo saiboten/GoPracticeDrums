@@ -3,8 +3,7 @@ import styled from 'react-emotion';
 import { Link } from 'react-router-dom';
 
 const Menu = styled('ul')`
-    display: flex;
-    justify-content: space-around;
+
 `;
 
 const MenuItem = styled('li')`

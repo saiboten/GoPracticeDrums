@@ -1,11 +1,24 @@
-import styled from 'react-emotion';
+import React from 'react';
+import { any } from 'prop-types';
+import { Grid, Row, Col } from '@smooth-ui/core-em';
+import Menu from './Menu';
 
-const Wrapper = styled('div')`
-  margin: 5rem auto;
-  padding: 1rem;
-  max-width: 600px;
-  font-size: 16px;
-  background-color: yellowgreen;
-`;
+const Wrapper = ({ children }) => (
+  <Grid>
+    <Row>
+      <Col>
+        <Menu />
+      </Col>
+      <Col xs={6}>
+        {children}
+      </Col>
+      <Col>3 of 3</Col>
+    </Row>
+  </Grid>
+);
+
+Wrapper.propTypes = {
+  children: any.isRequired,
+};
 
 export default Wrapper;
