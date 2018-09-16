@@ -8,13 +8,25 @@ const Menu = styled('ul')`
 `;
 
 const MenuItem = styled('li')`
+  list-style-type: none;
 
+  &:hover {
+    background-color: red;
+  }
+`;
+
+const StyleLink = styled(Link)`
+  text-decoration: none;
+
+  &:active, &:visited {
+    color: black;
+  }
 `;
 
 export default function FullMenu() {
   return (
     <Menu>
-      <MenuItem><Link to="/">Oversikt</Link></MenuItem>
-      <MenuItem><Link to="/addpractice">Legg til øving</Link></MenuItem>
+      <MenuItem><StyleLink to="/">Oversikt</StyleLink></MenuItem>
+      <MenuItem><StyleLink to="/addpractice">Legg til øving</StyleLink></MenuItem>
     </Menu>);
 }

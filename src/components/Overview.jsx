@@ -5,17 +5,29 @@ import { arrayOf, Any } from 'prop-types';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import Moment from 'react-moment';
+import styled from 'react-emotion';
+
+const StyleLink = styled(Link)`
+  text-decoration: none;
+
+  &:active, &:visited {
+    color: black;
+  }
+  &:hover {
+    background-color: brown;
+  }
+`;
 
 function Overview({ practices }) {
   const list = practices.map(el => (
     <li key={el.created}>
-      <Link to={`/practice/${el.created}`}>
+      <StyleLink to={`/practice/${el.created}`}>
         {el.setupComplete && `${el.header}`}
         {' '}
 -
         {' '}
         <Moment fromNowDuring={172800000} format="DD.MM.YYYY">{el.created}</Moment>
-      </Link>
+      </StyleLink>
     </li>));
 
   return (

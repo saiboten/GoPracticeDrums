@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { func } from 'prop-types';
 import { Redirect } from 'react-router-dom';
+import { Button } from '@smooth-ui/core-em';
 
 import Calendar from 'rc-calendar';
 import 'rc-calendar/assets/index.css';
@@ -38,13 +39,13 @@ class AddPractice extends Component {
     const { selectedDate, complete } = this.state;
 
     if (complete) {
-      return (<Redirect to="/" />);
+      return (<Redirect to={`/practice/${selectedDate}`} />);
     }
 
     return (
       <div>
         <Calendar onChange={this.handleChangedDate} />
-        {selectedDate && <button type="button" onClick={this.complete}>Legg til dag</button>}
+        {selectedDate && <Button onClick={this.complete}>Legg til dag</Button>}
       </div>
     );
   }
