@@ -9,11 +9,12 @@ function* addPractice(getFirebase, { date }) {
   }
 }
 
-function addLaps(count = 1, length = 60) {
+function addLaps(count = 1, length = 60, round) {
   const lap = {
     description: '',
     pass: false,
     length,
+    round,
   };
 
   const laps = [];
@@ -32,8 +33,8 @@ function* setupTiredAsF(getFirebase, { date }) {
       header: 'Tired as f',
       description: '',
       pass: false,
-      roundOne: addLaps(4),
-      roundTwo: addLaps(4),
+      roundOne: addLaps(8, 20, 1),
+      roundTwo: addLaps(8, 20, 2),
     });
   } catch (err) {
     console.log('Error in saga!:', err);
@@ -47,8 +48,8 @@ function* setPieceOfCake(getFirebase, { date }) {
       setupComplete: true,
       header: 'Piece of cake',
       description: '',
-      roundOne: addLaps(2, 900),
-      roundTwo: addLaps(3, 600),
+      roundOne: addLaps(2, 900, 1),
+      roundTwo: addLaps(3, 600, 2),
     });
   } catch (err) {
     console.log('Error in saga!:', err);

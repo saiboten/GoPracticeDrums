@@ -1,10 +1,20 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import {
-  shape, number, string, array, func,
+  shape, string, array, func, number,
 } from 'prop-types';
 import {
-  Typography, FormGroup, Label, Input, ControlFeedback, Box, Button,
+  Typography,
+  FormGroup,
+  Label,
+  Input,
+  ControlFeedback,
+  Box,
+  Button,
+  Checkbox,
+  FormCheck,
+  FormCheckLabel,
+  Textarea,
 } from '@smooth-ui/core-em';
 import styled from 'react-emotion';
 import { Form, Field } from 'react-final-form';
@@ -22,33 +32,37 @@ const StyledLi = styled('li')`
  margin-bottom: 1rem;
 `;
 
-function lap(el, index) {
-  return (
-    <StyledLi key={index}>
-      {index + 1}
-      {' '}
-runde
-      <div>
-Gikk det bra?
-        {' '}
-        {el.pass ? 'Jepp' : 'Nope'}
-      </div>
-      <div>
-Beskrivelse av runden:
-        {' '}
-        {el.description}
-      </div>
-
-    </StyledLi>
-  );
-}
-
 const adapt /* ⬅️ this is a HOC */ = Component => ({
   input,
   meta: { valid },
   ...rest
 }) => <Component {...input} {...rest} valid={valid} />;
+
 const AdaptedInput = adapt(Input);
+const AdaptedCheckbox = adapt(Checkbox);
+const AdaptedTextarea = adapt(Textarea);
+
+
+function lap({ round, length }, index) {
+  return (
+    <StyledLi key={index}>
+      <FormCheck>
+        <Field
+          name={`pass${round}_${index}`}
+          component={AdaptedCheckbox}
+          type="checkbox"
+          id={`pass${round}_${index}`}
+        />
+        <FormCheckLabel htmlFor={`pass${round}_${index}`}>{`${index + 1} runde (${length / 60} minutter)`}</FormCheckLabel>
+      </FormCheck>
+    </StyledLi>
+  );
+}
+
+lap.propTypes = {
+  round: number.isRequired,
+  length: number.isRequired,
+};
 
 const Error = ({ name }) => (
   <Field name={name} subscription={{ error: true, touched: true }}>
@@ -68,7 +82,7 @@ const required = value => (value ? undefined : 'Required');
 function PieceOfCake({
   submit,
   practice: {
-    bpm, description, header, roundOne, roundTwo,
+    bpm, description, header, roundOne, roundTwo, pass1_0, pass1_1, pass2_0, pass2_1, pass2_2, notes,
   },
 }) {
   const lapsRoundOne = roundOne.map(lap);
@@ -76,7 +90,15 @@ function PieceOfCake({
 
   return (<Form
     onSubmit={submit}
-    initialValues={{ bpm }}
+    initialValues={{
+      bpm,
+      pass1_0: pass1_0 || false,
+      pass1_1: pass1_1 || false,
+      pass2_0: pass2_0 || false,
+      pass2_1: pass2_1 || false,
+      pass2_2: pass2_2 || false,
+      notes,
+    }}
     render={({
       handleSubmit, form, submitting, pristine,
     }) => (
@@ -87,7 +109,7 @@ function PieceOfCake({
           <Field
             name="bpm"
             component={AdaptedInput}
-            placeholder="BPM goes here"
+            placeholder="Beats Per Minute"
             validate={required}
             control
           />
@@ -102,6 +124,17 @@ function PieceOfCake({
 
         <Typography variant="h2">Andre halvdel</Typography>
         <StyledUl>{lapsRoundTwo}</StyledUl>
+
+        <FormGroup>
+          <Label>Notater</Label>
+          <Field
+            name="notes"
+            component={AdaptedTextarea}
+            placeholder="Notater"
+            control
+          />
+          <Error name="notes" />
+        </FormGroup>
 
         <Box justifyContent="space-around">
           <Button
