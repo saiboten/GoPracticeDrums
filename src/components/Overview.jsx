@@ -11,6 +11,12 @@ import { Typography } from '@smooth-ui/core-em';
 import Wrapper from './Wrapper';
 import { Paragraph } from '.';
 
+const StyledRating = styled('span')`
+  margin-left: 5px;
+  color: red;
+  float: right;
+`;
+
 const StyledLink = styled(Link)`
   text-decoration: none;
   display: block;
@@ -33,6 +39,11 @@ function Overview({ practices }) {
     <StyledLink key={el.created} to={`/practice/${el.created}`}>
       {el.setupComplete ? `${el.header} - ` : 'Øvelse ikke satt opp - '}
       <Moment fromNowDuring={172800000} format="DD.MM.YYYY">{el.created}</Moment>
+      {el.rating && (
+      <StyledRating>
+        {el.rating}
+      </StyledRating>
+      )}
     </StyledLink>));
 
   return (

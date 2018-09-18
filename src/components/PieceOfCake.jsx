@@ -15,6 +15,8 @@ import {
   FormCheck,
   FormCheckLabel,
   Textarea,
+  Radio,
+  RadioGroup,
 } from '@smooth-ui/core-em';
 import styled from 'react-emotion';
 import { Form, Field } from 'react-final-form';
@@ -41,7 +43,7 @@ const adapt /* ⬅️ this is a HOC */ = Component => ({
 const AdaptedInput = adapt(Input);
 const AdaptedCheckbox = adapt(Checkbox);
 const AdaptedTextarea = adapt(Textarea);
-
+const AdaptedRadio = adapt(Radio);
 
 function lap({ round, length }, index) {
   return (
@@ -82,7 +84,18 @@ const required = value => (value ? undefined : 'Required');
 function PieceOfCake({
   submit,
   practice: {
-    bpm, description, header, roundOne, roundTwo, pass1_0, pass1_1, pass2_0, pass2_1, pass2_2, notes,
+    bpm,
+    description,
+    header,
+    roundOne,
+    roundTwo,
+    pass1_0,
+    pass1_1,
+    pass2_0,
+    pass2_1,
+    pass2_2,
+    notes,
+    rating,
   },
 }) {
   const lapsRoundOne = roundOne.map(lap);
@@ -98,6 +111,7 @@ function PieceOfCake({
       pass2_1: pass2_1 || false,
       pass2_2: pass2_2 || false,
       notes,
+      rating: rating || 0,
     }}
     render={({
       handleSubmit, form, submitting, pristine,
@@ -126,12 +140,103 @@ function PieceOfCake({
         <StyledUl>{lapsRoundTwo}</StyledUl>
 
         <FormGroup>
+          <Typography variant="h2">Rating</Typography>
+          <RadioGroup>
+
+            <Field
+              name="rating"
+              component={AdaptedRadio}
+              type="radio"
+              id="rating_1"
+              value="1"
+            />
+            <FormCheckLabel htmlFor="rating_1">1</FormCheckLabel>
+
+            <Field
+              name="rating"
+              component={AdaptedRadio}
+              type="radio"
+              id="rating_2"
+              value="2"
+            />
+            <FormCheckLabel htmlFor="rating_2">2</FormCheckLabel>
+            <Field
+              name="rating"
+              component={AdaptedRadio}
+              type="radio"
+              id="rating_3"
+              value="3"
+            />
+            <FormCheckLabel htmlFor="rating_3">3</FormCheckLabel>
+            <Field
+              name="rating"
+              component={AdaptedRadio}
+              type="radio"
+              id="rating_4"
+              value="4"
+            />
+            <FormCheckLabel htmlFor="rating_4">4</FormCheckLabel>
+            <Field
+              name="rating"
+              component={AdaptedRadio}
+              type="radio"
+              id="rating_5"
+              value="5"
+            />
+            <FormCheckLabel htmlFor="rating_5">5</FormCheckLabel>
+
+            <Field
+              name="rating"
+              component={AdaptedRadio}
+              type="radio"
+              id="rating_6"
+              value="6"
+            />
+            <FormCheckLabel htmlFor="rating_6">6</FormCheckLabel>
+            <Field
+              name="rating"
+              component={AdaptedRadio}
+              type="radio"
+              id="rating_7"
+              value="7"
+            />
+            <FormCheckLabel htmlFor="rating_7">7</FormCheckLabel>
+            <Field
+              name="rating"
+              component={AdaptedRadio}
+              type="radio"
+              id="rating_8"
+              value="8"
+            />
+            <FormCheckLabel htmlFor="rating_8">8</FormCheckLabel>
+            <Field
+              name="rating"
+              component={AdaptedRadio}
+              type="radio"
+              id="rating_9"
+              value="9"
+            />
+            <FormCheckLabel htmlFor="rating_9">9</FormCheckLabel>
+
+            <Field
+              name="rating"
+              component={AdaptedRadio}
+              type="radio"
+              id="rating_10"
+              value="10"
+            />
+            <FormCheckLabel htmlFor="rating_10">10</FormCheckLabel>
+          </RadioGroup>
+        </FormGroup>
+
+        <FormGroup>
           <Label>Notater</Label>
           <Field
             name="notes"
             component={AdaptedTextarea}
             placeholder="Notater"
             control
+            height="10rem"
           />
           <Error name="notes" />
         </FormGroup>

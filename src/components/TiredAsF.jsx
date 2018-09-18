@@ -69,20 +69,24 @@ lap.propTypes = {
 };
 
 const RadioButtonList = () => {
-  const list = new Array(10).fill('-');
+  const list = [];
 
-  return list.map((el, i) => (
-    <React.Fragment>
-      <Field
-        name="therating"
-        component={AdaptedRadio}
-        type="radio"
-        id={`rating${i + 1}`}
-        value={i + 1}
-      />
-      <FormCheckLabel htmlFor={`rating${i + 1}`}>{i + 1}</FormCheckLabel>
-    </React.Fragment>
-  ));
+  for (let i = 0; i < 10; i++) {
+    const item = (
+      <React.Fragment>
+        <Field
+          name="rating"
+          component={AdaptedRadio}
+          type="radio"
+          id={`rating_${i}`}
+          value={i}
+        />
+        <FormCheckLabel htmlFor={`rating_${i}`}>{i}</FormCheckLabel>
+      </React.Fragment>
+    );
+    list.push(item);
+  }
+  return list;
 };
 
 const Error = ({ name }) => (
@@ -183,7 +187,90 @@ function TiredAsF({
         <FormGroup>
           <Typography variant="h2">Rating</Typography>
           <RadioGroup>
-            <RadioButtonList />
+
+            <Field
+              name="rating"
+              component={AdaptedRadio}
+              type="radio"
+              id="rating_1"
+              value="1"
+            />
+            <FormCheckLabel htmlFor="rating_1">1</FormCheckLabel>
+
+            <Field
+              name="rating"
+              component={AdaptedRadio}
+              type="radio"
+              id="rating_2"
+              value="2"
+            />
+            <FormCheckLabel htmlFor="rating_2">2</FormCheckLabel>
+            <Field
+              name="rating"
+              component={AdaptedRadio}
+              type="radio"
+              id="rating_3"
+              value="3"
+            />
+            <FormCheckLabel htmlFor="rating_3">3</FormCheckLabel>
+            <Field
+              name="rating"
+              component={AdaptedRadio}
+              type="radio"
+              id="rating_4"
+              value="4"
+            />
+            <FormCheckLabel htmlFor="rating_4">4</FormCheckLabel>
+            <Field
+              name="rating"
+              component={AdaptedRadio}
+              type="radio"
+              id="rating_5"
+              value="5"
+            />
+            <FormCheckLabel htmlFor="rating_5">5</FormCheckLabel>
+
+            <Field
+              name="rating"
+              component={AdaptedRadio}
+              type="radio"
+              id="rating_6"
+              value="6"
+            />
+            <FormCheckLabel htmlFor="rating_6">6</FormCheckLabel>
+            <Field
+              name="rating"
+              component={AdaptedRadio}
+              type="radio"
+              id="rating_7"
+              value="7"
+            />
+            <FormCheckLabel htmlFor="rating_7">7</FormCheckLabel>
+            <Field
+              name="rating"
+              component={AdaptedRadio}
+              type="radio"
+              id="rating_8"
+              value="8"
+            />
+            <FormCheckLabel htmlFor="rating_8">8</FormCheckLabel>
+            <Field
+              name="rating"
+              component={AdaptedRadio}
+              type="radio"
+              id="rating_9"
+              value="9"
+            />
+            <FormCheckLabel htmlFor="rating_9">9</FormCheckLabel>
+
+            <Field
+              name="rating"
+              component={AdaptedRadio}
+              type="radio"
+              id="rating_10"
+              value="10"
+            />
+            <FormCheckLabel htmlFor="rating_10">10</FormCheckLabel>
           </RadioGroup>
         </FormGroup>
 
