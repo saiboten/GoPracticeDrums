@@ -19,6 +19,8 @@ import {
   FormCheck,
   FormCheckLabel,
   Textarea,
+  Radio,
+  RadioGroup,
 } from '@smooth-ui/core-em';
 import { pieceOfCakeUpdate } from '../actions';
 import Paragraph from './Paragraph';
@@ -43,6 +45,7 @@ const adapt /* ⬅️ this is a HOC */ = Component => ({
 const AdaptedInput = adapt(Input);
 const AdaptedCheckbox = adapt(Checkbox);
 const AdaptedTextarea = adapt(Textarea);
+const AdaptedRadio = adapt(Radio);
 
 function lap({ round, length }, index) {
   return (
@@ -63,6 +66,23 @@ function lap({ round, length }, index) {
 lap.propTypes = {
   round: number.isRequired,
   length: number.isRequired,
+};
+
+const RadioButtonList = () => {
+  const list = new Array(10).fill('-');
+
+  return list.map((el, i) => (
+    <React.Fragment>
+      <Field
+        name="therating"
+        component={AdaptedRadio}
+        type="radio"
+        id={`rating${i + 1}`}
+        value={i + 1}
+      />
+      <FormCheckLabel htmlFor={`rating${i + 1}`}>{i + 1}</FormCheckLabel>
+    </React.Fragment>
+  ));
 };
 
 const Error = ({ name }) => (
@@ -89,6 +109,7 @@ function TiredAsF({
     roundOne,
     roundTwo,
     notes,
+    rating,
     pass1_0,
     pass1_1,
     pass1_2,
@@ -115,6 +136,7 @@ function TiredAsF({
     initialValues={{
       bpm,
       notes,
+      rating: rating || 0,
       pass1_0: pass1_0 || false,
       pass1_1: pass1_1 || false,
       pass1_2: pass1_2 || false,
@@ -159,12 +181,20 @@ function TiredAsF({
         <StyledUl>{lapsRoundTwo}</StyledUl>
 
         <FormGroup>
+          <Typography variant="h2">Rating</Typography>
+          <RadioGroup>
+            <RadioButtonList />
+          </RadioGroup>
+        </FormGroup>
+
+        <FormGroup>
           <Label>Notater</Label>
           <Field
             name="notes"
             component={AdaptedTextarea}
             placeholder="Notater"
             control
+            height="10rem"
           />
           <Error name="notes" />
         </FormGroup>
