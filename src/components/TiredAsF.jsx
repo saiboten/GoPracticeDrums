@@ -4,8 +4,6 @@ import {
   shape, number, string, array, func,
 } from 'prop-types';
 import styled from 'react-emotion';
-
-
 import { Form, Field } from 'react-final-form';
 import {
   Typography,
@@ -19,11 +17,11 @@ import {
   FormCheck,
   FormCheckLabel,
   Textarea,
-  Radio,
   RadioGroup,
 } from '@smooth-ui/core-em';
 import { pieceOfCakeUpdate } from '../actions';
 import Paragraph from './Paragraph';
+import RadioButtonList from './RadioButtonList';
 
 const StyledUl = styled('ul')`
     margin: 0;
@@ -45,7 +43,6 @@ const adapt /* ⬅️ this is a HOC */ = Component => ({
 const AdaptedInput = adapt(Input);
 const AdaptedCheckbox = adapt(Checkbox);
 const AdaptedTextarea = adapt(Textarea);
-const AdaptedRadio = adapt(Radio);
 
 function lap({ round, length }, index) {
   return (
@@ -66,27 +63,6 @@ function lap({ round, length }, index) {
 lap.propTypes = {
   round: number.isRequired,
   length: number.isRequired,
-};
-
-const RadioButtonList = () => {
-  const list = [];
-
-  for (let i = 0; i < 10; i++) {
-    const item = (
-      <React.Fragment>
-        <Field
-          name="rating"
-          component={AdaptedRadio}
-          type="radio"
-          id={`rating_${i}`}
-          value={i}
-        />
-        <FormCheckLabel htmlFor={`rating_${i}`}>{i}</FormCheckLabel>
-      </React.Fragment>
-    );
-    list.push(item);
-  }
-  return list;
 };
 
 const Error = ({ name }) => (
@@ -187,90 +163,7 @@ function TiredAsF({
         <FormGroup>
           <Typography variant="h2">Rating</Typography>
           <RadioGroup>
-
-            <Field
-              name="rating"
-              component={AdaptedRadio}
-              type="radio"
-              id="rating_1"
-              value="1"
-            />
-            <FormCheckLabel htmlFor="rating_1">1</FormCheckLabel>
-
-            <Field
-              name="rating"
-              component={AdaptedRadio}
-              type="radio"
-              id="rating_2"
-              value="2"
-            />
-            <FormCheckLabel htmlFor="rating_2">2</FormCheckLabel>
-            <Field
-              name="rating"
-              component={AdaptedRadio}
-              type="radio"
-              id="rating_3"
-              value="3"
-            />
-            <FormCheckLabel htmlFor="rating_3">3</FormCheckLabel>
-            <Field
-              name="rating"
-              component={AdaptedRadio}
-              type="radio"
-              id="rating_4"
-              value="4"
-            />
-            <FormCheckLabel htmlFor="rating_4">4</FormCheckLabel>
-            <Field
-              name="rating"
-              component={AdaptedRadio}
-              type="radio"
-              id="rating_5"
-              value="5"
-            />
-            <FormCheckLabel htmlFor="rating_5">5</FormCheckLabel>
-
-            <Field
-              name="rating"
-              component={AdaptedRadio}
-              type="radio"
-              id="rating_6"
-              value="6"
-            />
-            <FormCheckLabel htmlFor="rating_6">6</FormCheckLabel>
-            <Field
-              name="rating"
-              component={AdaptedRadio}
-              type="radio"
-              id="rating_7"
-              value="7"
-            />
-            <FormCheckLabel htmlFor="rating_7">7</FormCheckLabel>
-            <Field
-              name="rating"
-              component={AdaptedRadio}
-              type="radio"
-              id="rating_8"
-              value="8"
-            />
-            <FormCheckLabel htmlFor="rating_8">8</FormCheckLabel>
-            <Field
-              name="rating"
-              component={AdaptedRadio}
-              type="radio"
-              id="rating_9"
-              value="9"
-            />
-            <FormCheckLabel htmlFor="rating_9">9</FormCheckLabel>
-
-            <Field
-              name="rating"
-              component={AdaptedRadio}
-              type="radio"
-              id="rating_10"
-              value="10"
-            />
-            <FormCheckLabel htmlFor="rating_10">10</FormCheckLabel>
+            <RadioButtonList />
           </RadioGroup>
         </FormGroup>
 
