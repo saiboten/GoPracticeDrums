@@ -17,11 +17,11 @@ import {
   FormCheck,
   FormCheckLabel,
   Textarea,
-  RadioGroup,
 } from '@smooth-ui/core-em';
 import { updatePractice } from '../actions';
 import Paragraph from './Paragraph';
 import RadioButtonList from './RadioButtonList';
+import { RadioButtonsWrapper } from './RadioButtonsWrapper';
 
 const StyledUl = styled('ul')`
     margin: 0;
@@ -162,9 +162,9 @@ function TiredAsF({
 
         <FormGroup>
           <Typography variant="h2">Rating</Typography>
-          <RadioGroup>
+          <RadioButtonsWrapper>
             <RadioButtonList />
-          </RadioGroup>
+          </RadioButtonsWrapper>
         </FormGroup>
 
         <FormGroup>

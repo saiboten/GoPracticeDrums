@@ -15,13 +15,13 @@ import {
   FormCheck,
   FormCheckLabel,
   Textarea,
-  RadioGroup,
 } from '@smooth-ui/core-em';
 import styled from 'react-emotion';
 import { Form, Field } from 'react-final-form';
 import Paragraph from './Paragraph';
 import { updatePractice } from '../actions';
 import RadioButtonList from './RadioButtonList';
+import { RadioButtonsWrapper } from './RadioButtonsWrapper';
 
 const StyledUl = styled('ul')`
     margin: 0;
@@ -140,9 +140,9 @@ function PieceOfCake({
 
         <FormGroup>
           <Typography variant="h2">Rating</Typography>
-          <RadioGroup>
+          <RadioButtonsWrapper>
             <RadioButtonList />
-          </RadioGroup>
+          </RadioButtonsWrapper>
         </FormGroup>
 
         <FormGroup>
