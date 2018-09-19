@@ -13,8 +13,16 @@ import { Paragraph } from '.';
 
 const StyledRating = styled('span')`
   margin-left: 5px;
-  color: red;
+  color: #bd4932;
   float: right;
+  position: relative;
+`;
+
+const RatingText = styled('span')`
+  position: absolute;
+  font-size: .5rem;
+  left: -1.5rem;
+  top: 0.6rem;
 `;
 
 const StyledLink = styled(Link)`
@@ -32,6 +40,10 @@ const StyledLink = styled(Link)`
     background-color: #bd4932;
     color: white;
   }
+
+  &:hover > span {
+    color: white;
+  }
 `;
 
 function Overview({ practices }) {
@@ -41,7 +53,8 @@ function Overview({ practices }) {
       <Moment fromNowDuring={172800000} format="DD.MM.YYYY">{el.created}</Moment>
       {el.rating && (
       <StyledRating>
-        {el.rating}
+        <RatingText>Rating</RatingText>
+        <span>{el.rating}</span>
       </StyledRating>
       )}
     </StyledLink>));
