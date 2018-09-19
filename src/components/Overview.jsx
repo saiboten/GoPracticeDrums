@@ -46,11 +46,19 @@ const StyledLink = styled(Link)`
   }
 `;
 
+const StyledDate = styled('span')`
+  font-size: .8rem;
+`;
+
 function Overview({ practices }) {
   const list = practices.map(el => (
     <StyledLink key={el.created} to={`/practice/${el.created}`}>
-      {el.setupComplete ? `${el.header} - ` : 'Øvelse ikke satt opp - '}
-      <Moment fromNowDuring={172800000} format="DD.MM.YYYY">{el.created}</Moment>
+      {el.setupComplete ? `${el.header} ` : 'Øvelse ikke satt opp'}
+      <StyledDate>
+(
+        <Moment fromNowDuring={172800000} format="DD.MM.YYYY">{el.created}</Moment>
+)
+      </StyledDate>
       {el.rating && (
       <StyledRating>
         <RatingText>Rating</RatingText>
