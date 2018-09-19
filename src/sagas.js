@@ -56,7 +56,7 @@ function* setPieceOfCake(getFirebase, { date }) {
   }
 }
 
-function* updatePieceOfCake(getFirebase, { date, newValues }) {
+function* setupPractice(getFirebase, { date, newValues }) {
   try {
     yield getFirebase().update(`/practices/${date}`, {
       ...newValues,
@@ -70,7 +70,7 @@ function* watchAddPractice(getFirebase) {
   yield takeEvery('ADD_PRACTICE', addPractice, getFirebase);
   yield takeEvery('SETUP_TIRED_AS_F', setupTiredAsF, getFirebase);
   yield takeEvery('SETUP_PIECE_OF_CAKE', setPieceOfCake, getFirebase);
-  yield takeEvery('PIECE_OF_CAKE_UPDATE', updatePieceOfCake, getFirebase);
+  yield takeEvery('UPDATE_PRACTICE', setupPractice, getFirebase);
 }
 
 export default function* rootSaga(getFirebase) {

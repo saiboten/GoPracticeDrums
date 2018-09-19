@@ -15,13 +15,12 @@ import {
   FormCheck,
   FormCheckLabel,
   Textarea,
-  Radio,
   RadioGroup,
 } from '@smooth-ui/core-em';
 import styled from 'react-emotion';
 import { Form, Field } from 'react-final-form';
 import Paragraph from './Paragraph';
-import { pieceOfCakeUpdate } from '../actions';
+import { updatePractice } from '../actions';
 import RadioButtonList from './RadioButtonList';
 
 const StyledUl = styled('ul')`
@@ -186,6 +185,6 @@ PieceOfCake.propTypes = {
 
 export default connect(null, (dispatch, ownProps) => ({
   submit(newValues) {
-    dispatch(pieceOfCakeUpdate(ownProps.match.params.created, newValues));
+    dispatch(updatePractice(ownProps.match.params.created, newValues));
   },
 }))(PieceOfCake);

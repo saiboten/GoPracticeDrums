@@ -19,7 +19,7 @@ import {
   Textarea,
   RadioGroup,
 } from '@smooth-ui/core-em';
-import { pieceOfCakeUpdate } from '../actions';
+import { updatePractice } from '../actions';
 import Paragraph from './Paragraph';
 import RadioButtonList from './RadioButtonList';
 
@@ -207,6 +207,6 @@ TiredAsF.propTypes = {
 
 export default connect(null, (dispatch, ownProps) => ({
   submit(newValues) {
-    dispatch(pieceOfCakeUpdate(ownProps.match.params.created, newValues));
+    dispatch(updatePractice(ownProps.match.params.created, newValues));
   },
 }))(TiredAsF);
