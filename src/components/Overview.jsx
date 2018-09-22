@@ -11,32 +11,44 @@ import { Typography, Select } from '@smooth-ui/core-em';
 import Wrapper from './Wrapper';
 import { Paragraph } from '.';
 
+const StyledHeader = styled('span')`
+  flex: 1 0 25%;
+`;
+
+const StyledDate = styled('span')`
+  flex: 1 0 25%;
+  font-size: .8rem;
+`;
+
+
 const StyledBpmWrapper = styled('span')`
+  flex: 1 0 25%;
   margin-left: 5px;
   font-size: .8rem;
 `;
 
-const StyledBpm = styled('span')`
-  font-size: 1.2rem;
-`;
-
 const StyledRating = styled('span')`
+  flex: 1 0 25%;
   margin-left: 5px;
   color: #bd4932;
   float: right;
   position: relative;
 `;
 
+const StyledBpm = styled('span')`
+  font-size: 1.2rem;
+`;
+
+
 const RatingText = styled('span')`
-  position: absolute;
   font-size: .5rem;
-  left: -1.5rem;
-  top: 0.6rem;
 `;
 
 const StyledLink = styled(Link)`
   text-decoration: none;
-  display: block;
+  display: flex;
+  justify-content: space-between;
+  text-align: center;
   font-size: 1.2rem;
   margin-bottom: 1rem;
   padding: 1rem;
@@ -55,9 +67,6 @@ const StyledLink = styled(Link)`
   }
 `;
 
-const StyledDate = styled('span')`
-  font-size: .8rem;
-`;
 
 class Overview extends React.Component {
   constructor(props) {
@@ -91,7 +100,7 @@ class Overview extends React.Component {
 
     const list = practices.filter(el => el && (selectedFilter === '' || el.type === selectedFilter)).map(el => (
       <StyledLink key={el.created} to={`/practice/${el.created}`}>
-        {el.setupComplete ? `${el.header} ` : 'Øvelse ikke satt opp'}
+        <StyledHeader>{el.setupComplete ? `${el.header} ` : 'Øvelse ikke satt opp'}</StyledHeader>
         <StyledDate>
 (
           <Moment fromNowDuring={172800000} format="DD.MM.YYYY">{el.created}</Moment>
