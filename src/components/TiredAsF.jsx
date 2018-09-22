@@ -11,17 +11,16 @@ import {
   Label,
   Input,
   ControlFeedback,
-  Box,
-  Button,
   Checkbox,
   FormCheck,
   FormCheckLabel,
   Textarea,
 } from '@smooth-ui/core-em';
-import { updatePractice } from '../actions';
+import { updatePractice, deletePractice } from '../actions';
 import Paragraph from './Paragraph';
 import RadioButtonList from './RadioButtonList';
 import { RadioButtonsWrapper } from './RadioButtonsWrapper';
+import { BottomButtons } from './BottomButtons';
 
 const StyledUl = styled('ul')`
     margin: 0;
@@ -80,34 +79,35 @@ Error.propTypes = {
 
 const required = value => (value ? undefined : 'Required');
 
-function TiredAsF({
-  submit,
-  practice: {
-    bpm,
-    description,
-    header,
-    roundOne,
-    roundTwo,
-    notes,
-    rating,
-    pass1_0,
-    pass1_1,
-    pass1_2,
-    pass1_3,
-    pass1_4,
-    pass1_5,
-    pass1_6,
-    pass1_7,
-    pass2_0,
-    pass2_1,
-    pass2_2,
-    pass2_3,
-    pass2_4,
-    pass2_5,
-    pass2_6,
-    pass2_7,
-  },
-}) {
+function TiredAsF(props) {
+  const {
+    submit,
+    practice: {
+      bpm,
+      description,
+      header,
+      roundOne,
+      roundTwo,
+      notes,
+      rating,
+      pass1_0,
+      pass1_1,
+      pass1_2,
+      pass1_3,
+      pass1_4,
+      pass1_5,
+      pass1_6,
+      pass1_7,
+      pass2_0,
+      pass2_1,
+      pass2_2,
+      pass2_3,
+      pass2_4,
+      pass2_5,
+      pass2_6,
+      pass2_7,
+    },
+  } = props;
   const lapsRoundOne = roundOne.map(lap);
   const lapsRoundTwo = roundTwo.map(lap);
 
@@ -179,16 +179,7 @@ function TiredAsF({
           <Error name="notes" />
         </FormGroup>
 
-        <Box justifyContent="space-around">
-          <Button
-            type="submit"
-            disabled={submitting || pristine}
-            variant="primary"
-          >
-                  Oppdater
-          </Button>
-        </Box>
-
+        <BottomButtons submitting={submitting} pristine={pristine} {...props} />
       </form>)}
   />
   );
@@ -208,5 +199,8 @@ TiredAsF.propTypes = {
 export default connect(null, (dispatch, ownProps) => ({
   submit(newValues) {
     dispatch(updatePractice(ownProps.match.params.created, newValues));
+  },
+  deletePractice() {
+    dispatch(deletePractice(ownProps.match.params.created));
   },
 }))(TiredAsF);

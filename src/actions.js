@@ -18,3 +18,8 @@ export const updatePractice = (date, newValues) => ({
   date,
   newValues,
 });
+
+export const deletePractice = date => ({
+  type: 'DELETE_PRACTICE',
+  date,
+});

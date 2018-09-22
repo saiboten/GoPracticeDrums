@@ -66,11 +66,20 @@ function* setupPractice(getFirebase, { date, newValues }) {
   }
 }
 
+function* deletePractice(getFirebase, { date }) {
+  try {
+    yield getFirebase().remove(`/practices/${date}`);
+  } catch (err) {
+    console.log('Error in saga!:', err);
+  }
+}
+
 function* watchAddPractice(getFirebase) {
   yield takeEvery('ADD_PRACTICE', addPractice, getFirebase);
   yield takeEvery('SETUP_TIRED_AS_F', setupTiredAsF, getFirebase);
   yield takeEvery('SETUP_PIECE_OF_CAKE', setPieceOfCake, getFirebase);
   yield takeEvery('UPDATE_PRACTICE', setupPractice, getFirebase);
+  yield takeEvery('DELETE_PRACTICE', deletePractice, getFirebase);
 }
 
 export default function* rootSaga(getFirebase) {
