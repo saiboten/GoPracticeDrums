@@ -98,7 +98,7 @@ class Overview extends React.Component {
     types.push({ label: 'Ingen', value: '' });
     types = types.concat(Object.values(typesObj));
 
-    const list = practices.filter(el => el && (selectedFilter === '' || el.type === selectedFilter)).map(el => (
+    const list = practices.reverse().filter(el => el && (selectedFilter === '' || el.type === selectedFilter)).map(el => (
       <StyledLink key={el.created} to={`/practice/${el.created}`}>
         <StyledHeader>{el.setupComplete ? `${el.header} ` : 'Øvelse ikke satt opp'}</StyledHeader>
         <StyledDate>
